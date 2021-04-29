@@ -44,7 +44,7 @@ public class DBController extends SQLiteOpenHelper {
     public ArrayList<HashMap<String,String>> getAllTeman(){
         ArrayList<HashMap<String,String>> daftarTeman;
         daftarTeman = new ArrayList<HashMap<String, String>>();
-        String selectQuery = "select * from Teman";
+        String selectQuery = "select * from teman";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
         if(cursor.moveToFirst()) {

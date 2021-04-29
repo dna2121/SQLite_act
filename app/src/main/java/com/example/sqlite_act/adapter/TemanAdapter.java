@@ -23,15 +23,16 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
     }
 
     //untuk memanggil tampilan layout adapternya
+
     @Override
-    public TemanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TemanViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layInf = LayoutInflater.from(parent.getContext());
         View view = layInf.inflate(R.layout.row_data_teman, parent, false);
         return new TemanViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TemanViewHolder holder, int position) {
+    public void onBindViewHolder(TemanViewHolder holder, int position) {
         String nm,tlp;
 
         nm = listData.get(position).getNama();
