@@ -13,26 +13,34 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.HashMap;
 
-public class TemanBaru extends AppCompatActivity {
+public class EditTeman extends AppCompatActivity {
     private TextInputEditText tNama, tTelpon;
-    private Button simpanBtn;
+    private Button editBtn;
     String nm, tlp;
     DBController controller = new DBController(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teman_baru);
+        setContentView(R.layout.activity_edit_teman);
 
-        tNama = (TextInputEditText) findViewById(R.id.tietNama);
-        tTelpon = (TextInputEditText) findViewById(R.id.tietTelpon);
-        simpanBtn = (Button) findViewById(R.id.buttonSave);
+        tNama = (TextInputEditText) findViewById(R.id.tietNamaBaru);
+        tTelpon = (TextInputEditText) findViewById(R.id.tietTelponBaru);
+        editBtn = (Button) findViewById(R.id.buttonUpdate);
 
-        simpanBtn.setOnClickListener(new View.OnClickListener() {
+        controller = new DBController(EditTeman.this);
+
+        nm = getIntent().getStringExtra("nama");
+        tlp = getIntent().getStringExtra("telpon");
+
+        tNama.setText(nm);
+        tTelpon.setText(tlp);
+
+        editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(tNama.getText().toString().equals("") || tTelpon.getText().toString().equals("")) {
-                    Toast.makeText(getApplicationContext(), "Data Belum Lengkap !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Edit Data Belum Lengkap !", Toast.LENGTH_SHORT).show();
                 } else {
                     nm = tNama.getText().toString();
                     tlp = tTelpon.getText().toString();
@@ -41,7 +49,9 @@ public class TemanBaru extends AppCompatActivity {
                     qvalues.put("nama", nm);
                     qvalues.put("telpon", tlp);
 
-                    controller.insertData(qvalues);
+                    controller.updateData(qvalues);
+
+                    Toast.makeText(EditTeman.this, "Data Updated..", Toast.LENGTH_SHORT).show();
                     callHome();
                 }
             }
@@ -49,7 +59,7 @@ public class TemanBaru extends AppCompatActivity {
     }
 
     public void callHome() {
-        Intent intent = new Intent(TemanBaru.this, MainActivity.class);
+        Intent intent = new Intent(EditTeman.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
