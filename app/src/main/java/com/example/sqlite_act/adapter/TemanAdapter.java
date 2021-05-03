@@ -7,8 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -88,7 +86,12 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
                                 context.startActivity(i);
                                 break;
                             case R.id.hapus:
+                                HashMap<String,String> qvaluess = new HashMap<>();
+                                qvaluess.put("nama",nm);
+                                controller.deleteData(qvaluess);
                                 Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(context, MainActivity.class);
+                                context.startActivity(intent);
                                 break;
                         }
                         return true;

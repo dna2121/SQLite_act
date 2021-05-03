@@ -50,6 +50,12 @@ public class DBController extends SQLiteOpenHelper {
         basisdata.close();
     }
 
+    public void deleteData(HashMap<String,String> queryValues){
+        SQLiteDatabase basisdata = this.getWritableDatabase();
+        basisdata.delete("teman","nama=?", new String[]{queryValues.get("nama")});
+        basisdata.close();
+    }
+
     public ArrayList<HashMap<String,String>> getAllTeman(){
         ArrayList<HashMap<String,String>> daftarTeman;
         daftarTeman = new ArrayList<HashMap<String, String>>();
