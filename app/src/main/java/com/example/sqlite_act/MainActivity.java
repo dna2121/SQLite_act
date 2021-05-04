@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     private TemanAdapter adapter;
     private ArrayList<Teman> temanArrayList;
     DBController controller = new DBController(this);
-    String id, nm, tlp;
     private FloatingActionButton fab;
 
     @Override
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         fab = findViewById(R.id.floatingBtn);
         BacaData();
-        adapter = new TemanAdapter(temanArrayList, MainActivity.this);
+        adapter = new TemanAdapter(temanArrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -49,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1){
-            recreate();
-        }
     }
 
     public void BacaData() {

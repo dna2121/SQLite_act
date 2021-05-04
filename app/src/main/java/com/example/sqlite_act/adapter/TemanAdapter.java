@@ -44,9 +44,10 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
 
     @Override
     public void onBindViewHolder(TemanViewHolder holder, int position) {
-        String nm,tlp;
+        String nm,tlp, id;
         DBController controller = new DBController(context);
 
+        id = listData.get(position).getId();
         nm = listData.get(position).getNama();
         tlp = listData.get(position).getTelpon();
 
@@ -61,6 +62,7 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LihatTeman.class);
+                intent.putExtra("id", id);
                 intent.putExtra("Nama", nm);
                 intent.putExtra("Telpon", tlp);
                 context.startActivity(intent);
@@ -81,6 +83,7 @@ public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHol
                         switch (item.getItemId()){
                             case R.id.edit:
                                 Intent i = new Intent(context, EditTeman.class);
+                                i.putExtra("id", id);
                                 i.putExtra("nama",nm);
                                 i.putExtra("telpon",tlp);
                                 context.startActivity(i);
